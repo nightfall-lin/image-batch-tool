@@ -49,8 +49,10 @@ def main() -> None:
     expect_value_error([{"name": "Eve"}])
     expect_value_error([{"name": "Eve", "score": True}])
     expect_value_error([{"name": "Eve", "score": 101}])
+    expect_value_error(None)
+    expect_value_error([{"name": 123, "score": 70}])
 
-    print("第 1 天完整诊断通过：7/7 / Day 1 full diagnostic passed: 7/7")
+    print("第 1 天完整诊断通过：9/9 / Day 1 full diagnostic passed: 9/9")
 
 
 if __name__ == "__main__":
