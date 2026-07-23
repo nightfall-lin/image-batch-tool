@@ -1,93 +1,106 @@
 # image-batch-tool
 
-五个月学习计划的第一个实践项目。
-The first practice project in the five-month learning plan.
+这是五个月学习计划的第一个实践项目。最终会完成图片扫描、尺寸调整、格式转换、错误记录、JSON 报告和自动化测试。
 
-## 当前状态 / Current status
+## 学习进度
 
-- Day 1 已完成：输入校验与成绩统计，完整验收 9/9。
-  Day 1 completed: input validation and score summary, full acceptance 9/9.
-- 当前任务：第 1 周 Day 2，列表推导式、迭代器和生成器。
-  Current task: Week 1 Day 2, list comprehensions, iterators, and generators.
+- Day 1 已完成：函数、容器、输入校验和异常处理，完整验收 9/9。
+- Day 2 已完成：文件名筛选、扩展名大小写处理、迭代器和生成器，完整验收 7/7。
+- 当前任务：第 1 周 Day 3，类、异常和 JSON 文件操作。
 
-## Day 2 目标 / Day 2 objective
+## 已使用的知识点
 
-实现 `day2_collections.py` 中的两个函数：
-Implement the two functions in `day2_collections.py`:
+### Day 1：函数、容器与输入校验
 
-1. `filter_image_names`：从文件名列表中返回图片文件名列表。
-   `filter_image_names`: return image filenames from a filename list.
-2. `iter_image_names`：逐个产生图片文件名，不预先生成完整结果列表。
-   `iter_image_names`: yield image filenames one at a time without building the full result list first.
+- 函数定义、参数、返回值和类型标注。
+- 列表、字典、循环、`sum`、`max` 与列表筛选。
+- `ValueError`：在使用数据前验证类型、字段和值域。
+- 条件短路：先验证类型，再调用字符串方法，例如先判断 `isinstance(name, str)`，再使用 `name.strip()`。
+- 函数不应修改传入的列表。
 
-支持的后缀 / Supported suffixes:
+### Day 2：文件名筛选、迭代器和生成器
 
-```text
-.jpg, .jpeg, .png, .webp
-```
+- `str.lower()` 与 `str.endswith()`：忽略扩展名大小写。
+- 普通 `for` 循环和列表推导式都可以筛选数据。
+- `yield`：逐个生成结果，不需要提前创建完整列表。
+- `iter()`、`next()` 和生成器的逐步取值行为。
+- 输入顺序需要在筛选后保持不变。
 
-扩展名需要忽略大小写，并且返回顺序必须与输入顺序一致。
-Extensions must be case-insensitive, and result order must match input order.
+## Day 3 目标
 
-本日不要求处理非字符串元素、空列表异常或真实磁盘目录；这些内容稍后再加入。
-Today does not require validation for non-string entries, empty-list exceptions, or real disk directories; those will be added later.
+在 `day3_report.py` 中完成以下内容：
 
-## 建议时间安排 / Suggested two-hour schedule
+1. `ProcessingReport` 类：保存一个图片处理任务的名称和图片文件名。
+2. `add_image` 方法：添加有效的图片文件名。
+3. `to_dict` 方法：把对象转换为普通字典。
+4. `save_json` 方法：将报告保存为 UTF-8 编码的 JSON 文件。
+5. `load_report` 函数：从 JSON 文件读取报告内容。
 
-| 时间 / Time | 任务 / Task |
+今天只处理字符串名称、JSON 文件读写和 `FileNotFoundError`。不处理真实图片、不扫描目录、不创建复杂继承结构。
+
+## 完成任务需要学习的知识
+
+### 主学习资源
+
+按下面顺序阅读官方中文文档，总时长控制在 40 分钟：
+
+1. [类的初步认识](https://docs.python.org/zh-cn/3/tutorial/classes.html#a-first-look-at-classes)：只阅读类定义、实例属性、`__init__` 和实例方法。
+2. [处理异常](https://docs.python.org/zh-cn/3/tutorial/errors.html#handling-exceptions)：重点理解 `raise ValueError` 和 `FileNotFoundError`。
+3. [`pathlib.Path.read_text` 与 `pathlib.Path.write_text`](https://docs.python.org/zh-cn/3/library/pathlib.html#pathlib.Path.read_text)：只了解使用 UTF-8 读取和写入文本。
+4. [json 模块](https://docs.python.org/zh-cn/3/library/json.html)：只看 `json.dumps`、`json.loads`、`ensure_ascii=False` 和 `indent=2`。
+
+停止学习条件：能够解释“类用来把数据和操作数据的方法放在一起”“`self` 表示当前对象”“JSON 是可保存到文件的字典/列表格式”后，立即开始编码。
+
+### 替代学习资源
+
+在 Bilibili 搜索 `Python 类 JSON 文件读写 异常处理`，选择包含 `__init__`、`self`、`json.dump` 或 `json.dumps` 演示的视频。只看这些片段，不需要学习继承、魔术方法、装饰器或复杂异常层级。
+
+## 建议的两小时安排
+
+| 时间 | 任务 |
 |---|---|
-| 20 分钟 / min | 回顾 Day 1 中的 `for`、列表和字典 / Review `for`, lists, and dictionaries from Day 1 |
-| 40 分钟 / min | 学习列表推导式、迭代器和 `yield` / Learn list comprehensions, iterators, and `yield` |
-| 55 分钟 / min | 独立完成两个函数 / Implement the two functions independently |
-| 5 分钟 / min | 运行验收、查看差异、Git 提交 / Run checks, inspect diff, and commit |
+| 20 分钟 | 回顾 Day 1 的 `ValueError`、字典和列表；回顾 Day 2 的文件名列表。 |
+| 40 分钟 | 按主学习资源阅读类、异常、`Path` 与 JSON 的指定范围。 |
+| 55 分钟 | 独立实现 `day3_report.py`，按下面的推荐顺序逐步完成。 |
+| 5 分钟 | 运行验收、查看 Git 差异并提交。 |
 
-## 学习材料 / Learning resources
+推荐实现顺序：
 
-- [Python 数据结构：列表推导式 / Data Structures: List Comprehensions](https://docs.python.org/zh-cn/3/tutorial/datastructures.html#list-comprehensions)
-- [Python 迭代器 / Iterators](https://docs.python.org/zh-cn/3/library/stdtypes.html#iterator-types)
-- [Python 生成器 / Generators](https://docs.python.org/zh-cn/3/howto/functional.html#generators)
+1. 先完成 `__init__` 和 `to_dict`。
+2. 再完成 `add_image` 的参数校验和追加逻辑。
+3. 再实现 `save_json`。
+4. 最后实现 `load_report`。
 
-主资源 / Primary resource：依次阅读上面的三个官方页面。先只阅读列表推导式的基本形式、迭代器的 `iter()`/`next()` 说明，以及生成器中包含 `yield` 的示例；总时长控制在 30 分钟。
-Read the three official pages in order. Focus only on basic list-comprehension syntax, the `iter()`/`next()` explanation, and generator examples containing `yield`; limit this to 30 minutes.
+## 验收标准
 
-替代资源 / Alternative resource：在 Bilibili 搜索 `Python 列表推导式 迭代器 生成器`，选择时长 20-40 分钟、包含 `yield` 演示的入门视频。只观看列表推导式、`iter`/`next` 和 `yield` 三段，不必看完整课程。
-Search Bilibili for `Python 列表推导式 迭代器 生成器`, choose a 20-40 minute introductory video that demonstrates `yield`, and watch only the three relevant segments rather than the entire course.
-
-开始编码条件 / Start-coding condition：能够口头回答“列表推导式返回列表，`yield` 返回可逐个取值的生成器”后，立即开始实现两个函数；不必先理解生成器表达式、嵌套推导式或自定义迭代器类。
-Start coding as soon as you can explain: “a list comprehension returns a list, while `yield` produces a generator that can be consumed one value at a time.” You do not need generator expressions, nested comprehensions, or custom iterator classes yet.
-
-只需理解三个问题：
-Focus on only three questions:
-
-1. 列表推导式与普通 `for` 循环都能筛选数据，它们的返回结果有什么区别？
-   Both list comprehensions and `for` loops can filter data. How do their results differ?
-2. 调用生成器函数时，为什么函数体不会立刻运行完？
-   Why does a generator function not run to completion immediately when called?
-3. `yield` 和 `return` 的区别是什么？
-   What is the difference between `yield` and `return`?
-
-## 验收 / Acceptance
+运行命令：
 
 ```powershell
-python .\check_day2.py
+python .\check_day3.py
 ```
 
-预期输出 / Expected output:
+验收总分为 7/7，每一项含义如下：
 
-```text
-第 2 天验收通过：7/7 / Day 2 acceptance passed: 7/7
-```
+| 项目 | 具体要求 |
+|---|---|
+| 1/7 | 用有效任务名创建 `ProcessingReport` 后，`to_dict()` 返回任务名、图片数为 0、图片列表为空。 |
+| 2/7 | 连续调用两次 `add_image` 后，图片列表保留输入顺序，图片数正确。 |
+| 3/7 | 任务名不是字符串、为空字符串或只有空白字符时，构造函数必须抛出 `ValueError`。 |
+| 4/7 | 图片名不是字符串、为空字符串或只有空白字符时，`add_image` 必须抛出 `ValueError`。 |
+| 5/7 | `save_json` 必须创建指定的 JSON 文件，并使用 UTF-8 编码。 |
+| 6/7 | 保存的 JSON 内容必须与 `to_dict()` 结果一致，`load_report` 读取后也必须返回同一内容。 |
+| 7/7 | 读取不存在的文件时，`load_report` 必须抛出 `FileNotFoundError`。 |
 
-## Git 提交 / Git commit
+预期输出会逐项显示以上 7 个要求的通过状态。
 
-确认测试通过后：
-After tests pass:
+## Git 提交
+
+确认 Day 3 的 7/7 全部通过后：
 
 ```powershell
-git add day2_collections.py check_day2.py README.md
-git commit -m "feat: add image filename iterators"
+git add day3_report.py check_day3.py README.md
+git commit -m "feat: add JSON processing reports"
 git push
 ```
 
-本仓库的 GitHub 代理配置已经设置。运行推送时保持 Clash 开启即可。
-The GitHub proxy is configured for this repository. Keep Clash running when pushing.
+本仓库已配置 GitHub 代理。推送前保持 Clash 运行即可。
