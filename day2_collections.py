@@ -20,7 +20,6 @@ def filter_image_names(names: list[str]) -> list[str]:
         if n.lower().endswith(IMAGE_SUFFIXES):
             res.append(n)
     return res
-    raise NotImplementedError("Complete Day 2: filter image names")
 
 
 def iter_image_names(names: list[str]) -> Generator[str, None, None]:
